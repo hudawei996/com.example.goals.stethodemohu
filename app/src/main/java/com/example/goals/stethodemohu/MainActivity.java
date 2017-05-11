@@ -8,7 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.goals.stethodemohu.model.Person;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
+import com.jayfeng.lesscode.core.SharedPreferenceLess;
+import com.jayfeng.lesscode.core.ToastLess;
 
 import java.io.IOException;
 
@@ -21,7 +24,8 @@ import okhttp3.Response;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnNetwork;
-
+    private Button btnSharedPreference;
+    private Button btnSqlite;
 
     private static final int NETWORK = 0x01;
 
@@ -50,10 +54,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initView() {
         btnNetwork = (Button) findViewById(R.id.btn_network);
+        btnSharedPreference = (Button) findViewById(R.id.btn_sharedPreference);
+        btnSqlite = (Button) findViewById(R.id.btn_sqlite);
     }
 
     private void initListener() {
         btnNetwork.setOnClickListener(this);
+        btnSharedPreference.setOnClickListener(this);
+        btnSqlite.setOnClickListener(this);
 
     }
 
@@ -63,9 +71,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_network:
                 getFromNetwork();
                 break;
+            case R.id.btn_sharedPreference:
+                writeToSharedPreference();
+                break;
+            case R.id.btn_sqlite:
+                writeToSqlite();
+                break;
             default:
                 break;
         }
+    }
+
+    private void writeToSharedPreference() {
+        SharedPreferenceLess.$put("name", "StethoDemo");
+        SharedPreferenceLess.$put("version", "v1.0.0");
+        ToastLess.$(this, "save to SharedPreference successfully!");
+    }
+
+    private void writeToSqlite() {
+        Person person = new Person();
+        person.setName("Jake");
+        person.setAge(19);
+        person.save();
+
+        ToastLess.$(this, "save to Sqlite successfully!");
     }
 
     private void getFromNetwork() {

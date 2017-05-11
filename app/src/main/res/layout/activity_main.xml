@@ -18,6 +18,17 @@
             android:layout_height="wrap_content"
             android:text="网络请求"/>
 
+        <Button
+            android:id="@+id/btn_sharedPreference"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="写入SharedPreference"/>
+        <Button
+            android:id="@+id/btn_sqlite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="写入数据库"/>
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
